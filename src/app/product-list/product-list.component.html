@@ -1,45 +1,44 @@
-<h2>Products</h2>
-
-<div *ngFor="let Product of products">
-    <h3>
-        <a [title]="Product.name+'detalles'"
-        [routerLink]="[ '/products',Product.id]">
-            {{Product.name}}
-
-        </a>
-        
-    </h3>
-
-    <p>
-        Precio: {{Product.price | currency}}
-
-
-    </p>
-    
-     <p *ngIf="Product.description">
-         descripcion: {{Product.description}}
-
-        
-     </p>
-
-     <button type="button" (click)="share(Product.name)">
-        Compartir
-         
-     </button>
-
-     <app-product-alerts 
-     [Product]="Product"
-     (notify)="onNotify()" >
+<mat-card class="card">
+  <div *ngFor="let Product of products">
+    <mat-card-title>
+        <h3>
+          <a
+            [title]="Product.name + 'detalles'"
+            [routerLink]="['/products', Product.id]"
+          >
+            {{ Product.name }}
+          </a>
+        </h3>
+        <hr>
+    </mat-card-title>
      
-     </app-product-alerts>
+    <mat-card-content>
+        <p>Precio: {{ Product.price | currency }}</p>
+    
+        <p *ngIf="Product.description">descripcion: {{ Product.description }}</p>
+         
+        <img
+                class="photo"
+                [src]="Product.photo"
+                [alt]="Product.name"
+                width="200px"
+                height="200px"
+              />
+              <hr />
+        <button type="button" (click)="share(Product.name)">Compartir</button>
+    
+        <button type="button" [routerLink]="['/products', Product.id]">
+          Detalle
+        </button>
+        <hr>
+    </mat-card-content>
 
-     <button type="button" [routerLink]=" [ '/products', Product.id] ">    
-          Detalle  
-
-     </button>
-
+    
+     
 </div>
 
+</mat-card>
+ 
 
 <!-- 
 Copyright Google LLC. All Rights Reserved.
