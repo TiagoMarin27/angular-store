@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from './products';
+import { Product, products } from './products';
 import {HttpClient} from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
@@ -7,12 +7,18 @@ import {HttpClient} from '@angular/common/http'
 export class CartService {
   items:  Product[] = [];
   constructor(private http: HttpClient) {
-  this.items = JSON.parse(localStorage.getItem("Items")!)
+   if(localStorage.getItem("Items")){
+      this.items = JSON.parse(localStorage.getItem("Items")!)
+   } else{
+     console.log(this.items)
+   }
+   
 
    }
 
-  addTocart(Product: Product){
-    this.items.push(Product)
+  addTocart(product: Product){
+    console.log(this.items,product)
+    this.items.push(product)
     localStorage.setItem("Items",JSON.stringify(this.items))
   }
 
